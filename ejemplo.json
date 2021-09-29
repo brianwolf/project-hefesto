@@ -1,6 +1,6 @@
 [
     {
-        "module": "bash",
+        "module": "sh",
         "cmd": "> asd.txt"
     },
     {
@@ -14,7 +14,7 @@
         "path": "UTN-sensorial-raspberry-deploy"
     },
     {
-        "module": "bash",
+        "module": "sh",
         "cmd": "> hola.txt"
     },
     {
@@ -22,7 +22,7 @@
         "path": ""
     },
     {
-        "module": "bash",
+        "module": "sh",
         "cmd": "> volvi.txt"
     }
 ]
