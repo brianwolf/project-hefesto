@@ -1,0 +1,26 @@
+[
+    {
+        "module": "bash",
+        "cmd": "> asd.txt"
+    },
+    {
+        "module": "bash",
+        "cmd": "git clone https://github.com/brianwolf/UTN-sensorial-raspberry-deploy.git"
+    },
+    {
+        "module": "workingdir",
+        "path": "UTN-sensorial-raspberry-deploy"
+    },
+    {
+        "module": "bash",
+        "cmd": "> hola.txt"
+    },
+    {
+        "module": "workingdir",
+        "path": ""
+    },
+    {
+        "module": "bash",
+        "cmd": "> volvi.txt"
+    }
+]

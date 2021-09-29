@@ -14,24 +14,28 @@ def exec(pipeline: List[Dict[str, any]]) -> Tuple[UUID, str]:
     id = fs_service.create()
 
     try:
+        original_workindir = os.getcwd()
+        workindir = fs_service.fullpath(id)
+        os.chdir(workindir)
+        
         for stage in pipeline:
 
             module_name = stage['module']
-            module_path = f'logic/apps/modules/{module_name}.py'
+            module_path = f'{original_workindir}/logic/apps/modules/{module_name}.py'
 
             spec = spec_from_file_location(module_name, module_path)
             module = module_from_spec(spec)
             spec.loader.exec_module(module)
 
-            original_workindir = os.getcwd()
-            workindir = fs_service.fullpath(id)
-
-            os.chdir(workindir)
             module.exec(workindir, stage)
-            os.chdir(original_workindir)
 
+        os.chdir(original_workindir)
+    
     except Exception as e:
+        
+        os.chdir(original_workindir)
         fs_service.delete(id)
+        
         msj = str(e)
         raise AppException(PipelineError.EXECUTE_PIPELINE_ERROR, msj, e)
 
