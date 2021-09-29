@@ -32,8 +32,14 @@
             "asd.txt": "tuvieja.md",
             "README.md": "ASD.md"
         },
-        "regex":{
-            "\\w+.txt": "{it}.md"
-        }
+        "ignore": [".git"]
+    },
+    {
+        "module": "replace_content",
+        "words": {
+            ":latest": ":1.1.1.la-posta",
+            "UTN-sensorial-raspberry-deploy": "prueba"
+        },
+        "ignore": [".git"]
     }
 ]
