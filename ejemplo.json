@@ -24,5 +24,16 @@
     {
         "module": "sh",
         "cmd": "> volvi.txt"
+    },
+    {
+        "module": "replace_dir",
+        "words": {
+            "UTN-sensorial-raspberry-deploy": "prueba",
+            "asd.txt": "tuvieja.md",
+            "README.md": "ASD.md"
+        },
+        "regex":{
+            "\\w+.txt": "{it}.md"
+        }
     }
 ]
