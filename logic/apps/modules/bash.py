@@ -1,8 +1,8 @@
 from typing import Dict
 
-from logic.apps.modules.commons import sh_out
+from logic.apps.modules.commons import sh
 
 
-def exec(workingdir: str, config: Dict[str, str]) -> str:
+def exec(workingdir: str, config: Dict[str, str]):
     cmd = config['cmd']
-    return sh_out(f'/bin/sh -c "{cmd}"')
+    sh(f'/bin/sh -c "{cmd}"')

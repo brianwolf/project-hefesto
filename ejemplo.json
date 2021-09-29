@@ -4,8 +4,10 @@
         "cmd": "> asd.txt"
     },
     {
-        "module": "bash",
-        "cmd": "git clone https://github.com/brianwolf/UTN-sensorial-raspberry-deploy.git"
+        "module": "git_clone",
+        "url": "https://github.com/brianwolf/UTN-sensorial-raspberry-deploy.git",
+        "user": "asd",
+        "pass": "asd"
     },
     {
         "module": "workingdir",
