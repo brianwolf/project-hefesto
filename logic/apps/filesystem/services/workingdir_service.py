@@ -1,9 +1,8 @@
 import shutil
+from os import walk
 from pathlib import Path
 from typing import List
 from uuid import UUID, uuid4
-from os import walk
-
 
 from logic.apps.admin.config.variables import Vars, get_var
 
@@ -26,6 +25,5 @@ def get(id: UUID) -> List[str]:
     result = []
     for (dirpath, _, _) in walk(fullpath(id)):
         result.extend(dirpath)
-        
-    return result
 
+    return result

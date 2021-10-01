@@ -13,7 +13,7 @@ pipeline_model = name_space.model('Pipeline', {})
 
 
 @name_space.route('')
-class Examples(Resource):
+class Pipelines(Resource):
 
     @name_space.expect(pipeline_model, code=200, validate=False)
     def post(self):

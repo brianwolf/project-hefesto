@@ -3,7 +3,8 @@ from importlib.util import module_from_spec, spec_from_file_location
 from typing import Dict, List, Tuple
 from uuid import UUID
 
-from logic.apps.filesystem.services import fs_service
+from logic.apps.admin.config.variables import Vars, get_var
+from logic.apps.filesystem.services import workingdir_service
 from logic.apps.pipeline.errors.pipeline_error import PipelineError
 from logic.apps.zip.services import zip_service
 from logic.libs.exception.exception import AppException
@@ -13,17 +14,17 @@ from .garbage_collector import add_pipeline_runned
 
 def exec(pipeline: List[Dict[str, any]]) -> Tuple[UUID, str]:
 
-    id = fs_service.create()
+    id = workingdir_service.create()
 
     try:
         original_workindir = os.getcwd()
-        workindir = fs_service.fullpath(id)
+        workindir = workingdir_service.fullpath(id)
         os.chdir(workindir)
 
         for stage in pipeline:
 
             module_name = stage['module']
-            module_path = f'{original_workindir}/logic/apps/repo_modules/{module_name}.py'
+            module_path = f'{original_workindir}/{get_var(Vars.MODULES_RELATIVE_PATH)}/{module_name}.py'
 
             spec = spec_from_file_location(module_name, module_path)
             module = module_from_spec(spec)
@@ -36,7 +37,7 @@ def exec(pipeline: List[Dict[str, any]]) -> Tuple[UUID, str]:
     except Exception as e:
 
         os.chdir(original_workindir)
-        fs_service.delete(id)
+        workingdir_service.delete(id)
 
         msj = str(e)
         raise AppException(PipelineError.EXECUTE_PIPELINE_ERROR, msj, e)

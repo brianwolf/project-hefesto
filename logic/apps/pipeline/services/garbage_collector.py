@@ -2,7 +2,7 @@ import threading
 import time
 from uuid import UUID
 
-from logic.apps.filesystem.services import fs_service
+from logic.apps.filesystem.services import workingdir_service
 from logic.libs.logger.logger import logger
 
 _pipelines_runned = []
@@ -14,7 +14,7 @@ def garbabge_collector():
     global _pipelines_runned
 
     for id in _pipelines_runned:
-        fs_service.delete(id)
+        workingdir_service.delete(id)
         logger().info(f'Deleted workingdir -> {id}')
 
     _pipelines_runned = []
