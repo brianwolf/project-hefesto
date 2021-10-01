@@ -7,6 +7,7 @@ Herramientas de reflection muy variadas
 """
 from importlib.util import module_from_spec, spec_from_file_location
 from types import ModuleType
+from typing import List
 
 from logic.libs.reflection.src import load_modules
 
@@ -25,7 +26,7 @@ def get_module_by_path(module_path: str) -> ModuleType:
     return module
 
 
-def load_modules_by_path(modules_path: str):
+def load_modules_by_path(modules_path: str) -> List[ModuleType]:
     """
     Carga los archivos python recursivamente dentro del directorio, no ejecuta ningun metodo, simplemente hace un import de los mismos.\n
     Es posible pasarle una regex. \n
@@ -34,11 +35,14 @@ def load_modules_by_path(modules_path: str):
     'logic/apps/routes'
     ```
     """
+    modules = []
     for path in load_modules.get_modules_paths(modules_path):
-        get_module_by_path(path)
+        modules.append(get_module_by_path(path))
+
+    return modules
 
 
-def load_modules_by_regex_path(modules_path: str):
+def load_modules_by_regex_path(modules_path: str) -> List[ModuleType]:
     """
     Igual que load_modules_by_path() pero se le puede pasar un regex.\n
     Ejemplo:
@@ -46,5 +50,7 @@ def load_modules_by_regex_path(modules_path: str):
     'logic/apps/*/routes'
     ```
     """
+    modules = []
     for path in load_modules.get_modules_paths_by_regex(modules_path):
-        get_module_by_path(path)
+        modules.append(get_module_by_path(path))
+    return modules

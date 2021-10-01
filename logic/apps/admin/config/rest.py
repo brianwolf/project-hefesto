@@ -1,13 +1,12 @@
 from flask import Flask
-from logic.libs.reflection import reflection
 from logic.libs.rest import rest
 
-api = None
+flask_app = None
 
 
 def setup_rest(app: Flask) -> Flask:
 
-    global api
-    api = rest.config_flask_app(app)
+    global flask_app
 
-    reflection.load_modules_by_regex_path('logic/apps/*/routes')
+    flask_app = rest.config_flask_app(app)
+    rest.load_routes_by_regex_path(app, 'logic/apps/*/routes')
