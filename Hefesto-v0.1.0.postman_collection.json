@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "92c4ad5c-e0de-4f18-915a-1b22eb12372a",
+		"name": "Hefesto-v0.1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "modules",
+							"item": [
+								{
+									"name": "post",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "from typing import Dict\n\nfrom logic.apps.repo_modules.commons import sh\n\n\ndef exec(workingdir: str, config: Dict[str, str]):\n    cmd = config['cmd']\n    sh(f'/bin/sh -c \"{cmd}\"')",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hefesto}}/api/v1/modules/asd",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"modules",
+												"asd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/modules/sh",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"modules",
+												"sh"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "list",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/modules",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"modules"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "pipelines",
+							"item": [
+								{
+									"name": "post",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"module\": \"sh\",\n        \"cmd\": \"> asd.txt\"\n    },\n    {\n        \"module\": \"git_clone\",\n        \"url\": \"https://github.com/brianwolf/UTN-sensorial-raspberry-deploy.git\",\n        \"user\": \"asd\",\n        \"pass\": \"asd\"\n    },\n    {\n        \"module\": \"workingdir\",\n        \"path\": \"UTN-sensorial-raspberry-deploy\"\n    },\n    {\n        \"module\": \"sh\",\n        \"cmd\": \"> hola.txt\"\n    },\n    {\n        \"module\": \"workingdir\",\n        \"path\": \"\"\n    },\n    {\n        \"module\": \"sh\",\n        \"cmd\": \"> volvi.txt\"\n    },\n    {\n        \"module\": \"replace_dir\",\n        \"words\": {\n            \"UTN-sensorial-raspberry-deploy\": \"prueba\",\n            \"asd.txt\": \"tuvieja.md\",\n            \"README.md\": \"ASD.md\"\n        },\n        \"ignore\": [\".git\"]\n    },\n    {\n        \"module\": \"replace_content\",\n        \"words\": {\n            \":latest\": \":1.1.1.la-posta\",\n            \"UTN-sensorial-raspberry-deploy\": \"prueba\"\n        },\n        \"ignore\": [\".git\"]\n    }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hefesto}}/api/v1/pipelines/exec",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"pipelines",
+												"exec"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "alive",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hefesto}}",
+							"host": [
+								"{{hefesto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hefesto}}/vars",
+							"host": [
+								"{{hefesto}}"
+							],
+							"path": [
+								"vars"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "hefesto",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

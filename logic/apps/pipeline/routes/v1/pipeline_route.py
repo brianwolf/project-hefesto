@@ -7,7 +7,7 @@ from logic.apps.pipeline.services import exec_pipeline_service
 blue_print = Blueprint('pipelines', __name__, url_prefix='/api/v1/pipelines')
 
 
-@blue_print.route('/', methods=['POST'])
+@blue_print.route('/exec', methods=['POST'])
 def exec_pipeline():
 
     id, zip_path = exec_pipeline_service.exec(request.json)
