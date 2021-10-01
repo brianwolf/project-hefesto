@@ -1,5 +1,5 @@
 from flask import Response, request
-from flask_restplus import Resource, fields
+from flask_restplus import Resource
 from logic.apps.admin.config.rest import api
 from logic.apps.admin.config.variables import Vars, get_var
 from logic.apps.filesystem.services import filesystem_service
@@ -28,7 +28,7 @@ class Modules(Resource):
     @name_space.produces(["text/plain"])
     def get(self, name: str):
 
-        path = f'{get_var(Vars.MODULES_RELATIVE_PATH)}/{name}'
+        path = f'{get_var(Vars.MODULES_RELATIVE_PATH)}/{name}.py'
         content = filesystem_service.get_file_content(path).decode('utf-8')
 
         return Response(content, mimetype='text/plain', status=201)
