@@ -1,4 +1,5 @@
 import os
+import shutil
 from typing import List
 
 
@@ -17,3 +18,7 @@ def name_files_from_path(path: str) -> List[str]:
     for _, _, name_files in os.walk(path):
         result += name_files
     return result
+
+
+def delete_file(path: str):
+    os.remove(path)

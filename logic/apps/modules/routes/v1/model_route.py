@@ -35,3 +35,12 @@ def list():
     ]
 
     return jsonify(result), 200
+
+
+@blue_print.route('/<name>', methods=['DELETE'])
+def delete(name: str):
+
+    path = f'{get_var(Vars.MODULES_RELATIVE_PATH)}/{name}.py'
+    filesystem_service.delete_file(path)
+
+    return '', 200
