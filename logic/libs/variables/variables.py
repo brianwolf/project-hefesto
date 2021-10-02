@@ -8,7 +8,7 @@ en caso de que exista la variable de ambiente en el sistema utiliza esa,
 en caso de que no, usa la del archivo 
 """
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List
 
@@ -22,8 +22,9 @@ class Config:
     Objeto de configuracion
     """
     file_path: str
-    hiden_vars: List[str]
     enum_vars: Enum
+    hiden_vars: List[str] = field(default_factory=list)
+    extra_vars: Dict[str, str] = field(default_factory=dict)
 
 
 def setup(configs: List[Config]):
@@ -33,6 +34,7 @@ def setup(configs: List[Config]):
     - configs -> lista de objetos de configuracion
     """
     for cfg in configs:
+        config.DICT_VARS.update(cfg.extra_vars)
         config.DICT_VARS.update(make_vars_dict(cfg.file_path))
         config.HIDEN_VARS.extend(cfg.hiden_vars)
         config.ENUMS_LIST.extend(cfg.enum_vars)

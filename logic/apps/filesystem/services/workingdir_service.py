@@ -6,6 +6,8 @@ from uuid import UUID, uuid4
 
 from logic.apps.admin.config.variables import Vars, get_var
 
+_TEMP_PATH = '/tmp'
+
 
 def create() -> UUID:
     id = uuid4()
@@ -18,7 +20,7 @@ def delete(id: UUID):
 
 
 def fullpath(id: UUID) -> str:
-    return f'{get_var(Vars.TEMP_PATH)}/{id}'
+    return f'{_TEMP_PATH}/{id}'
 
 
 def get(id: UUID) -> List[str]:

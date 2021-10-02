@@ -7,10 +7,9 @@ from logic.apps.admin.config.variables import Vars, get_var
 from logic.apps.filesystem.services import workingdir_service
 from logic.apps.modules.services import module_service
 from logic.apps.pipeline.errors.pipeline_error import PipelineError
+from logic.apps.pipeline.services.garbage_collector import add_pipeline_runned
 from logic.apps.zip.services import zip_service
 from logic.libs.exception.exception import AppException
-
-from .garbage_collector import add_pipeline_runned
 
 
 def exec(pipeline: List[Dict[str, any]]) -> Tuple[UUID, str]:

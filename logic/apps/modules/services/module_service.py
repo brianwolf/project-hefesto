@@ -1,34 +1,59 @@
 
 from datetime import datetime
+from pathlib import Path
 from typing import List
 from uuid import uuid4
 
-from logic.apps.example.models.example import Example
-from logic.apps.example.repositories import example_repository
+from logic.apps.admin.config.variables import Vars, get_var
+from logic.apps.filesystem.services import filesystem_service
+
+_MODULES_PATH = f'{Path.home()}/.hefesto/modules'
+_DEFAULT_RELATIVE_PATH = f'logic/apps/repo_modules'
 
 
-def get_example() -> Example:
-    """
-    Devuelve un objeto de ejemplo
-    """
-    return Example(
-        string='string',
-        integer=2,
-        date_time=datetime.now(),
-        double=2.3,
-        uuid=uuid4())
+def add(name: str, content: str):
+
+    path = f'{get_path()}/{name}.py'
+    filesystem_service.create_file(path, content)
 
 
-def add(m: Example) -> Example:
-    """
-    Guarda un Example
-    """
-    m.id = example_repository.add(m)
-    return m
+def get(name: str) -> str:
+
+    path = f'{get_path()}/{name}.py'
+    return filesystem_service.get_file_content(path).decode('utf-8')
 
 
-def get_all() -> List[Example]:
-    """
-    Obtiene todos los Example guardados
-    """
-    return example_repository.get_all()
+def list_all() -> List[str]:
+
+    return [
+        nf
+        for nf in filesystem_service.name_files_from_path(get_path())
+        if not nf.endswith('.pyc')
+    ]
+
+
+def list_default() -> List[str]:
+
+    return [
+        nf
+        for nf in filesystem_service.name_files_from_path(get_default_path())
+        if not nf.endswith('.pyc')
+    ]
+
+
+def delete(name: str):
+
+    path = f'{get_path()}/{name}.py'
+    filesystem_service.delete_file(path)
+
+
+def get_path() -> str:
+
+    global _MODULES_PATH
+    return _MODULES_PATH
+
+
+def get_default_path() -> str:
+
+    global _DEFAULT_RELATIVE_PATH
+    return _DEFAULT_RELATIVE_PATH
