@@ -1,5 +1,8 @@
 #!env/bin/python
 
+# ejemplo de uso:
+#   ./exec.py pipeline_ejemplo.json /home/brian/Descargas/asd.zip
+
 import json
 import os
 import sys
@@ -14,6 +17,12 @@ setup_vars()
 if len(sys.argv) < 2:
     print('Es requerido el path del pipeline como parametro')
 
+if len(sys.argv) < 3:
+    out_path = os.getcwd()
+
+if len(sys.argv) == 3:
+    out_path = sys.argv[2]
+
 pipeline_path = sys.argv[1]
 
 with open(pipeline_path) as json_file:
@@ -27,9 +36,8 @@ except Exception as e:
     print(f'Error al procesar pipeline -> {e}')
     exit()
 
-zip_name = os.path.basename(zip_path)
-filesystem_service.move_file(zip_path, zip_name)
+filesystem_service.move_file(zip_path, out_path)
 
-print(f'Zip generado con nombre -> {zip_name}')
+print(f'Zip generado en -> {out_path}')
 
 workingdir_service.delete(id)
