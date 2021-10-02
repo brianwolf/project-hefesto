@@ -1,45 +1,39 @@
-import threading
-import time
-from uuid import UUID
 
-from logic.apps.filesystem.services import workingdir_service
-from logic.libs.logger.logger import logger
+from datetime import datetime
+from pathlib import Path
+from typing import List
+from uuid import uuid4
 
-_pipelines_runned = []
-_thread_garbage_active = True
+from logic.apps.admin.config.variables import Vars, get_var
+from logic.apps.filesystem.services import filesystem_service
 
-
-def garbabge_collector():
-
-    global _pipelines_runned
-
-    for id in _pipelines_runned:
-        workingdir_service.delete(id)
-        logger().info(f'Deleted workingdir -> {id}')
-
-    _pipelines_runned = []
+_TEMPLATES_PATH = f'{Path.home()}/.hefesto/templates'
 
 
-def start_garbage_thread():
+def add(name: str, content: str):
 
-    global _thread_garbage_active
-    _thread_garbage_active = True
-
-    def thread_method():
-        global _thread_garbage_active
-        while _thread_garbage_active:
-            garbabge_collector()
-            time.sleep(30)
-
-    thread = threading.Thread(target=thread_method)
-    thread.start()
+    path = f'{get_path()}/{name}.txt'
+    filesystem_service.create_file(path, content)
 
 
-def stop_garbage_thread():
-    global _thread_garbage_active
-    _thread_garbage_active = False
+def get(name: str) -> str:
+
+    path = f'{get_path()}/{name}.txt'
+    return filesystem_service.get_file_content(path).decode('utf-8')
 
 
-def add_pipeline_runned(id: UUID):
-    global _pipelines_runned
-    _pipelines_runned.append(id)
+def list_all() -> List[str]:
+
+    return filesystem_service.name_files_from_path(get_path())
+
+
+def delete(name: str):
+
+    path = f'{get_path()}/{name}.txt'
+    filesystem_service.delete_file(path)
+
+
+def get_path() -> str:
+
+    global _TEMPLATES_PATH
+    return _TEMPLATES_PATH

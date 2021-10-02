@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "92c4ad5c-e0de-4f18-915a-1b22eb12372a",
+		"_postman_id": "dfd5ad79-87af-4045-9213-9ebad6aba2f5",
 		"name": "Hefesto-v0.1.0",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -75,6 +75,26 @@
 									"response": []
 								},
 								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/modules/asd",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"modules",
+												"asd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "list",
 									"request": {
 										"method": "GET",
@@ -88,6 +108,171 @@
 												"api",
 												"v1",
 												"modules"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "templates",
+							"item": [
+								{
+									"name": "post",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"module\": \"git_clone\",\n        \"url\": \"{{ repo }}\"\n    },\n    {\n        \"module\": \"sh\",\n        \"cmd\": \"echo {{ texto }} > {{ nombre_archivo }}\"\n    }\n]",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hefesto}}/api/v1/templates/ejemplo",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"templates",
+												"ejemplo"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "exec",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"repo\": \"github.com/brianwolf/UTN-sensorial-raspberry-deploy.git\",\n    \"texto\": \"hola mundo redondo!\",\n    \"nombre_archivo\": \"saludo.txt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hefesto}}/api/v1/templates/ejemplo/exec",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"templates",
+												"ejemplo",
+												"exec"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/templates/ejemplo",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"templates",
+												"ejemplo"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/templates/ejemplo",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"templates",
+												"ejemplo"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "list",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hefesto}}/api/v1/templates",
+											"host": [
+												"{{hefesto}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"templates"
 											]
 										}
 									},
