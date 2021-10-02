@@ -9,7 +9,7 @@ Dios herrero griego usado para forjar tus proyectos
 * python 3.9
 * virtualenv
 
-## :tada: Uso
+## :tada: Uso API web
 
 Levantar el ambiente
 
@@ -25,6 +25,14 @@ Ejecutar
 
 ```bash
 python app.py
+```
+
+## :tada: Uso script
+
+Se lo puede usar en modo script ejecutando:
+
+```bash
+./exec_pipeline.py <path del pipeline json> <path del zip generado>
 ```
 
 ## :books: Referencias
