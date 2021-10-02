@@ -13,4 +13,4 @@ def exec(workingdir: str, config: Dict[str, str]):
         sh(f'git clone https://{url}')
         return
 
-    sh(f'git clone https://{username}:{password}@{url}')
+    sh(f'git clone https://{username}:{password}@{url}', echo=False)

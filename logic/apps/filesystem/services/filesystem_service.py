@@ -22,3 +22,7 @@ def name_files_from_path(path: str) -> List[str]:
 
 def delete_file(path: str):
     os.remove(path)
+
+
+def move_file(path_in: str, path_out: str):
+    shutil.move(path_in, path_out)
