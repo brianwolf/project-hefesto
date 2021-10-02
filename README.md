@@ -11,11 +11,19 @@ Dios herrero griego usado para forjar tus proyectos
 
 ## :tada: Uso
 
-```bash
-# Levantar el ambiente
-make i
+Levantar el ambiente
 
-# Ejecutar
+```bash
+virtualenv -p python3.9 env
+
+. env/bin/activate
+
+pip install -r requeriments.txt
+```
+
+Ejecutar
+
+```bash
 python app.py
 ```
 
