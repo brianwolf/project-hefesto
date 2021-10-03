@@ -16,7 +16,7 @@ setup_loggers()
 setup_rest(app)
 
 start_garbage_thread()
-setup_templates()
+setup_modules()
 setup_templates()
 
 if __name__ == "__main__":

@@ -1,0 +1,4 @@
+examples/
+.vscode/
+env/
+__pycache__
