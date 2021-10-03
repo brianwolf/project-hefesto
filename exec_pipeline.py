@@ -1,7 +1,7 @@
 #!env/bin/python
 
 # ejemplo de uso:
-#   ./exec_pipeline.py -p pipeline_ejemplo.json -z /home/brian/Descargas/asd.zip
+#   ./exec_pipeline.py -p example/pipeline_ejemplo.json -z /home/brian/Descargas/asd.zip
 
 import argparse
 import json

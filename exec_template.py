@@ -1,10 +1,10 @@
 #!env/bin/python
 
 # ejemplos de uso:
-#   ./exec_template.py -t template_ejemplo.json -z asd.zip -p parametros_ejemplo.json
+#   ./exec_template.py -t example/template_ejemplo.json -z asd.zip -p example/parametros_ejemplo.json
 
 #   Para este es necesario que se halla cargado en template antes con nombre ejemplo
-#   ./exec_template.py -n ejemplo -z asd.zip -p parametros_ejemplo.json
+#   ./exec_template.py -n ejemplo -z asd.zip -p example/parametros_ejemplo.json
 
 import argparse
 import json
