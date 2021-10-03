@@ -1,4 +1,4 @@
-#!env/bin/python
+#!/usr/local/bin/python
 
 # ejemplo de uso:
 #   ./exec_pipeline.py -p example/pipeline_ejemplo.json -z /home/brian/Descargas/asd.zip

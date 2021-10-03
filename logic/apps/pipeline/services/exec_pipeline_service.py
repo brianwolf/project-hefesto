@@ -43,7 +43,7 @@ def exec(pipeline: List[Dict[str, any]], zip_name: str = 'project') -> Tuple[UUI
         msj = str(e)
         raise AppException(PipelineError.EXECUTE_PIPELINE_ERROR, msj, e)
 
-    zip_path = f'{workindir}/{zip_name}.zip'
+    zip_path = os.path.join(workindir, zip_name)
     zip_service.create(zip_path, workindir)
 
     add_pipeline_runned(id)

@@ -4,7 +4,6 @@ from typing import Dict, List, Tuple
 from uuid import UUID
 
 from jinja2 import Template
-from logic.apps.admin.config.variables import Vars, get_var
 from logic.apps.pipeline.services import exec_pipeline_service
 from logic.apps.templates.errors.template_error import TemplateError
 from logic.apps.templates.services import template_service

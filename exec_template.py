@@ -1,4 +1,4 @@
-#!env/bin/python
+#!/usr/local/bin/python
 
 # ejemplos de uso:
 #   ./exec_template.py -t example/template_ejemplo.json -z asd.zip -p example/parametros_ejemplo.json
