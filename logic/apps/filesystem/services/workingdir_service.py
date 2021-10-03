@@ -4,8 +4,6 @@ from pathlib import Path
 from typing import List
 from uuid import UUID, uuid4
 
-from logic.apps.admin.config.variables import Vars, get_var
-
 _TEMP_PATH = '/tmp'
 
 
