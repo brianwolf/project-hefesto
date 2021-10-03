@@ -17,4 +17,4 @@ def setup_modules():
         os.makedirs(modules_path, exist_ok=True)
 
     for name in names_modules:
-        shutil.copy(f'{default_path}/{name}', f'{modules_path}/{name}')
+        shutil.copy(f'{default_path}/{name}.py', f'{modules_path}/{name}.py')

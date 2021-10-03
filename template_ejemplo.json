@@ -5,6 +5,6 @@
     },
     {
         "module": "sh",
-        "cmd": "echo \"{{ texto }}\"> {{ nombre_archivo }}"
+        "cmd": "echo {{ texto }} > {{ nombre_archivo }}"
     }
 ]

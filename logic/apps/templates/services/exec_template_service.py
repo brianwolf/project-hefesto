@@ -11,7 +11,7 @@ from logic.apps.templates.services import template_service
 from logic.libs.exception.exception import AppException
 
 
-def exec(template_str: str, params: Dict[str, any], template_name: str) -> Tuple[UUID, str]:
+def exec(template_str: str, params: Dict[str, any], template_name: str = 'project.zip') -> Tuple[UUID, str]:
 
     try:
         print(f'Ejecutando template {template_name} con variables -> {params}')

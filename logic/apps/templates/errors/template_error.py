@@ -3,3 +3,4 @@ from enum import Enum
 
 class TemplateError(Enum):
     EXECUTE_TEMPLATE_ERROR = 'EXECUTE_TEMPLATE_ERROR'
+    TEMPLATE_NOT_EXISTS_ERROR = 'TEMPLATE_NOT_EXISTS_ERROR'
