@@ -1,29 +1,37 @@
 #!env/bin/python
 
 # ejemplo de uso:
-#   ./exec.py pipeline_ejemplo.json /home/brian/Descargas/asd.zip
+#   ./exec_pipeline.py -p pipeline_ejemplo.json -z /home/brian/Descargas/asd.zip
 
+import argparse
 import json
 import os
-import sys
 
+from logic.apps.admin.config.modules import setup_modules
 from logic.apps.admin.config.variables import setup_vars
 from logic.apps.filesystem.services import (filesystem_service,
                                             workingdir_service)
 from logic.apps.pipeline.services import exec_pipeline_service
 
+# VARIABLES
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', help='Path del pipeline a procesar')
+parser.add_argument('-z', help='Path del zip resultado')
+
+args = parser.parse_args()
+
+if not args.p:
+    print('El parametro del path del pipeline es requerido')
+    exit()
+
+out_path = os.getcwd() if args.z == None else args.z
+
+pipeline_path = args.p
+
+
+# CODIGO
 setup_vars()
-
-if len(sys.argv) < 2:
-    print('Es requerido el path del pipeline como parametro')
-
-if len(sys.argv) < 3:
-    out_path = os.getcwd()
-
-if len(sys.argv) == 3:
-    out_path = sys.argv[2]
-
-pipeline_path = sys.argv[1]
+setup_modules()
 
 with open(pipeline_path) as json_file:
     pipeline_dict = json.load(json_file)
