@@ -3,7 +3,6 @@ from importlib.util import module_from_spec, spec_from_file_location
 from typing import Dict, List, Tuple
 from uuid import UUID
 
-from logic.apps.admin.config.variables import Vars, get_var
 from logic.apps.filesystem.services import workingdir_service
 from logic.apps.modules.services import module_service
 from logic.apps.pipeline.errors.pipeline_error import PipelineError

@@ -1,5 +1,4 @@
 from enum import Enum
-from pathlib import Path
 
 from logic.libs.variables.variables import Config, get_var, setup
 
