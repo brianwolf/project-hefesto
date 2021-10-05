@@ -1,7 +1,6 @@
 import os
 from typing import Dict, List
 
-
 def walk_path(folder_path: str) -> List[str]:
     result = []
     for (dirpath, dirs, files) in os.walk(folder_path):
@@ -30,14 +29,16 @@ def exec(workingdir: str, config: Dict[str, str]):
     regex = config.get('regex')
     ignore = config.get('ignore', [])
 
-    paths = walk_path(workingdir)
-
     if words:
+        paths = walk_path(workingdir)
+
         for old, new in words.items():
             for path in paths:
 
                 if is_a_ignored_path(path, ignore):
                     continue
-                if path.endswith(old):
+
+                basename = os.path.basename(path)
+                if old in basename:
                     os.rename(path, path.replace(old, new))
                     paths = walk_path(workingdir)
