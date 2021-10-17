@@ -1,5 +1,7 @@
 import os
+import shutil
 from typing import Dict, List
+
 
 def walk_path(folder_path: str) -> List[str]:
     result = []
@@ -30,15 +32,15 @@ def exec(workingdir: str, config: Dict[str, str]):
     ignore = config.get('ignore', [])
 
     if words:
-        paths = walk_path(workingdir)
-
         for old, new in words.items():
-            for path in paths:
 
-                if is_a_ignored_path(path, ignore):
+            paths = walk_path(workingdir)
+            for i in range(0, len(paths)):
+
+                if is_a_ignored_path(paths[i], ignore):
                     continue
 
-                basename = os.path.basename(path)
+                basename = os.path.basename(paths[i])
                 if old in basename:
-                    os.rename(path, path.replace(old, new))
+                    shutil.move(paths[i], paths[i].replace(old, new))
                     paths = walk_path(workingdir)
