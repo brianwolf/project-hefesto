@@ -33,10 +33,9 @@ if not args.n and not args.t:
     print('Es requerido alguno de los parametros de nombre o template')
     exit()
 
-out_path = os.getcwd() if args.z == None else args.z
+out_path = 'project.zip' if args.z == None else args.z
 
 name = args.n
-out_path = args.z
 with open(args.t, 'r') as file:
     in_path = file.read()
 with open(args.p) as json_file:
