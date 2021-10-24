@@ -7,8 +7,9 @@
 #   ./exec_template.py -n ejemplo -z asd.zip -p example/parametros_ejemplo.json
 
 import argparse
-import json
-import os
+import logging
+
+import yaml
 
 from logic.apps.admin.config.modules import setup_modules
 from logic.apps.admin.config.variables import setup_vars
@@ -39,7 +40,7 @@ name = args.n
 with open(args.t, 'r') as file:
     in_path = file.read()
 with open(args.p) as json_file:
-    params_dict = json.load(json_file)
+    params_dict = yaml.load(json_file, Loader=yaml.FullLoader)
 
 
 # CODIGO
@@ -55,6 +56,7 @@ try:
         id, zip_path = exec_template_service.exec_from_name(name, params_dict)
 
 except Exception as e:
+    logging.exception(e)
     print(f'Error al procesar pipeline -> {e}')
     exit()
 
