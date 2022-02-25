@@ -1,6 +1,6 @@
 # :card_index_dividers: Hefesto
 
-Dios herrero griego usado para forjar tus proyectos
+> Dios herrero griego usado para forjar tus proyectos
 
 ![img](img/hefesto.jpg)
 
@@ -32,7 +32,15 @@ python app.py
 Se lo puede usar en modo script ejecutando:
 
 ```bash
-./exec_pipeline.py <path del pipeline json> <path del zip generado>
+make c
+
+./hefesto example/pipeline_ejemplo.yaml
+```
+
+Se puede ejecutar el siguiente comando para instalarlo en el sistema
+
+```bash
+sudo mv hefesto /usr/bin
 ```
 
 ## :books: Referencias
