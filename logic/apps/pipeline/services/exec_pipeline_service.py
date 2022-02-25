@@ -22,7 +22,7 @@ def exec(pipeline: List[Dict[str, any]], zip_name: str = 'project.zip') -> Tuple
         for stage in pipeline:
 
             module_name = stage['module']
-            module_path = f'{module_service.get_path()}/{module_name}.py'
+            module_path = f'{original_workindir}/{module_service.get_path()}/{module_name}.py'
 
             spec = spec_from_file_location(module_name, module_path)
             module = module_from_spec(spec)

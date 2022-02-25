@@ -6,8 +6,8 @@ from logic.apps.filesystem.services import filesystem_service
 from logic.apps.modules.errors.module_error import ModulesError
 from logic.libs.exception.exception import AppException
 
-_MODULES_PATH = f'{Path.home()}/.hefesto/modules'
-_DEFAULT_RELATIVE_PATH = f'logic/apps/repo_modules'
+_MODULES_PATH = f'repo_modules'
+_DEFAULT_RELATIVE_PATH = f'repo_modules'
 
 
 def add(name: str, content: str):

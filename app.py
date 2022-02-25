@@ -50,7 +50,7 @@ def _get_params_dict(params_str) -> Dict[str, any]:
 # SCRIPT
 # ----------------------------------------
 setup_vars()
-setup_modules()
+# setup_modules()
 
 print(f'Yaml cargado')
 print(f'Ejecutando...')
