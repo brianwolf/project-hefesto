@@ -51,8 +51,10 @@ def _get_params_dict(params_str) -> Dict[str, any]:
 
 # SCRIPT
 # ----------------------------------------
+
 yaml_path = f'{os.getcwd()}/{yaml_path}' if not yaml_path.startswith('/') else yaml_path
 out_path = f'{os.getcwd()}/{out_path}' if not out_path.startswith('/') else out_path
+
 os.chdir(sys._MEIPASS)
 
 setup_vars()
