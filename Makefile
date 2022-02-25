@@ -11,7 +11,9 @@ compile c:
 	
 	pyinstaller app.py \
 		--onefile \
-		--paths logic/apps/repo_modules
+		--add-data variables.yaml:. \
+		--add-data repo_modules:repo_modules \
+		-n hefesto
 	
-	mv dist/* .
-	rm -fr build dist *.spec
+	# mv dist/* .
+	# rm -fr build dist *.spec

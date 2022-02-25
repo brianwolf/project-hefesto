@@ -1,12 +1,13 @@
 #!/usr/local/bin/python
 
+import sys
+import os
 import argparse
 import logging
 from typing import Dict
 
 import yaml
 
-from logic.apps.admin.config.modules import setup_modules
 from logic.apps.admin.config.variables import setup_vars
 from logic.apps.filesystem.services import (filesystem_service,
                                             workingdir_service)
@@ -31,6 +32,7 @@ params_str = args.p if args.p else ''
 
 # FUNCIONES
 # ----------------------------------------
+
 def _get_dict(yaml_path: str) -> Dict[str, any]:
     with open(yaml_path) as f:
         return yaml.load(f.read(), Loader=yaml.FullLoader)
@@ -49,16 +51,17 @@ def _get_params_dict(params_str) -> Dict[str, any]:
 
 # SCRIPT
 # ----------------------------------------
+yaml_path = f'{os.getcwd()}/{yaml_path}' if not yaml_path.startswith('/') else yaml_path
+out_path = f'{os.getcwd()}/{out_path}' if not out_path.startswith('/') else out_path
+os.chdir(sys._MEIPASS)
+
 setup_vars()
-# setup_modules()
 
 print(f'Yaml cargado')
 print(f'Ejecutando...')
 
 try:
-
     if params_str:
-
         params_dict = _get_params_dict(params_str)
 
         with open(yaml_path) as f:
