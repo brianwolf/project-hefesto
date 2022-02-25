@@ -1,8 +1,17 @@
-ZIP ?= project.zip
-
-run r:	
-	python exec_pipeline.py -p ${PIPELINE} -z ${ZIP}
+runpipeline rp:	
+	python app.py examples/pipeline_ejemplo.yaml
 
 	
-run-template t:
-	python exec_template.py -p ${PARAMS} -z ${ZIP} -t ${TEMPLATE}
+runtemplate rt:
+	python app.py examples/template_ejemplo.yaml -p texto=hola,nombre_archivo=asd
+
+
+compile c:
+	rm -fr build dist *.spec
+	
+	pyinstaller app.py \
+		--onefile \
+		--paths logic/apps/repo_modules
+	
+	mv dist/* .
+	rm -fr build dist *.spec
