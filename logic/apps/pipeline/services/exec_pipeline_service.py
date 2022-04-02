@@ -9,8 +9,6 @@ from logic.apps.pipeline.errors.pipeline_error import PipelineError
 from logic.apps.zip.services import zip_service
 from logic.libs.exception.exception import AppException
 
-from .garbage_collector import add_pipeline_runned
-
 
 def exec(pipeline: List[Dict[str, any]], zip_name: str = 'project.zip') -> Tuple[UUID, str]:
 
@@ -24,7 +22,7 @@ def exec(pipeline: List[Dict[str, any]], zip_name: str = 'project.zip') -> Tuple
         for stage in pipeline:
 
             module_name = stage['module']
-            module_path = f'{module_service.get_path()}/{module_name}.py'
+            module_path = f'{original_workindir}/{module_service.get_path()}/{module_name}.py'
 
             spec = spec_from_file_location(module_name, module_path)
             module = module_from_spec(spec)
@@ -44,7 +42,5 @@ def exec(pipeline: List[Dict[str, any]], zip_name: str = 'project.zip') -> Tuple
 
     zip_path = os.path.join(workindir, zip_name)
     zip_service.create(zip_path, workindir)
-
-    add_pipeline_runned(id)
 
     return id, zip_path

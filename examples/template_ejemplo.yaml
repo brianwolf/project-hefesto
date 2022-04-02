@@ -1,5 +1,5 @@
 - module: git_clone
-  url: "{{ repo }}"
+  url: "https://github.com/brianwolf/UTN-sensorial-raspberry-deploy.git"
 
 - module: sh
   cmd: "echo {{ texto }} > {{ nombre_archivo }}"

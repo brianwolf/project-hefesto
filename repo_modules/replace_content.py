@@ -17,7 +17,6 @@ def files_on_path(folder_path: str) -> List[str]:
 
 def is_a_ignored_path(path: str, ignore: List[str]) -> bool:
 
-    asd = "asd".endswith()
     for i in ignore:
 
         i_path = i if i.endswith('/') else i + '/'
