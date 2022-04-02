@@ -1,7 +1,7 @@
 import os
 from typing import Dict
 
-from repo_modules.commons import sh
+from logic.apps.repo_modules.commons import sh
 
 
 def exec(workingdir: str, config: Dict[str, str]):
