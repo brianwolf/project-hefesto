@@ -11,9 +11,10 @@ compile c:
 	
 	pyinstaller app.py \
 		--onefile \
-		--add-data variables.yaml:. \
-		--add-data repo_modules:repo_modules \
 		-n hefesto
 	
 	mv dist/* .
 	rm -fr build dist *.spec
+		
+		# --add-data variables.yaml:. \
+		# --add-data repo_modules:repo_modules \
