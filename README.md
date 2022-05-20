@@ -36,7 +36,7 @@ make c
 
 ./hefesto example/pipeline_ejemplo.yaml
 ```
-:tada: Instalar el binario
+## :tada: Instalar el binario
 
 Se puede descargar el binario y usarlo en un sistema linux
 
