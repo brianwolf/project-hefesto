@@ -9,7 +9,7 @@
 * python 3.9
 * virtualenv
 
-## :tada: Uso API web
+## :tada: Uso con Python
 
 Levantar el ambiente
 
@@ -27,19 +27,22 @@ Ejecutar
 python app.py
 ```
 
-## :tada: Uso script
+## :tada: Construir el script
 
-Se lo puede usar en modo script ejecutando:
+Se lo puede usar en modo script ejecutando (se tiene que levantar el ambiente primero):
 
 ```bash
 make c
 
 ./hefesto example/pipeline_ejemplo.yaml
 ```
+:tada: Instalar el binario
 
-Se puede ejecutar el siguiente comando para instalarlo en el sistema
+Se puede descargar el binario y usarlo en un sistema linux
 
 ```bash
+wget https://github.com/brianwolf/project-hefesto/releases/download/1.0.0/hefesto
+sudo chmod +x hefesto
 sudo mv hefesto /usr/bin
 ```
 
