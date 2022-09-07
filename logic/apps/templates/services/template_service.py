@@ -1,15 +1,11 @@
 
-from datetime import datetime
-from pathlib import Path
 from typing import List
-from uuid import uuid4
 
-from logic.apps.admin.config.variables import Vars, get_var
 from logic.apps.filesystem.services import filesystem_service
 from logic.apps.templates.errors.template_error import TemplateError
 from logic.libs.exception.exception import AppException
 
-_TEMPLATES_PATH = f'{Path.home()}/.hefesto/templates'
+_TEMPLATES_PATH = f'logic/apps/repo_modules'
 
 
 def add(name: str, content: str):
