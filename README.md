@@ -1,6 +1,6 @@
 # :card_index_dividers: Hefesto
 
-> Dios herrero griego usado para forjar tus proyectos
+> Dios griego herrero usado para forjar tus proyectos
 
 ![img](img/hefesto.jpg)
 
@@ -24,7 +24,7 @@ pip install -r requeriments.txt
 Ejecutar
 
 ```bash
-python app.py
+python app.py examples/pipeline_ejemplo.yaml
 ```
 
 ## :tada: Uso script
