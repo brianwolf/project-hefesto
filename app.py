@@ -4,6 +4,7 @@ import argparse
 import logging
 import os
 import sys
+import urllib.request
 from sys import exit
 from typing import Dict
 
@@ -40,10 +41,17 @@ params_str = args.p if args.p else ''
 # FUNCIONES
 # ----------------------------------------
 
+def _get_content(yaml_path: str):
+
+    if yaml_path.startswith('http'):
+        return urllib.request.urlopen(yaml_path)
+
+    with open(yaml_path) as f:
+        return f.read()
+
 
 def _get_dict(yaml_path: str) -> Dict[str, any]:
-    with open(yaml_path) as f:
-        return yaml.load(f.read(), Loader=yaml.FullLoader)
+    return yaml.load(_get_content(yaml_path), Loader=yaml.FullLoader)
 
 
 def _get_params_dict(params_str) -> Dict[str, any]:
@@ -59,10 +67,6 @@ def _get_params_dict(params_str) -> Dict[str, any]:
 
 # SCRIPT
 # ----------------------------------------
-
-yaml_path = f'{os.getcwd()}/{yaml_path}' if not yaml_path.startswith('/') else yaml_path
-out_path = f'{os.getcwd()}/{out_path}' if not out_path.startswith('/') else out_path
-
 # para que funcione al estar compilado
 if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
@@ -74,15 +78,13 @@ try:
     if params_str:
         params_dict = _get_params_dict(params_str)
 
-        with open(yaml_path) as f:
-            yaml_str = f.read()
+        yaml_str = _get_content(yaml_path)
 
         id, zip_path = exec_template_service.exec(
             yaml_str, params_dict, out_path)
 
     else:
         yaml_dict = _get_dict(yaml_path)
-
         id, zip_path = exec_pipeline_service.exec(yaml_dict, out_path)
 
 except Exception as e:
