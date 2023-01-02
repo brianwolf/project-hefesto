@@ -16,8 +16,8 @@ hefesto example/pipeline_ejemplo.yaml
 
 ## :leftwards_arrow_with_hook: Navegar
 
-* [Documentacion para levantar el ambiente con python](docs/python.md)
-* [Como usar los modulos para crear pipelines y templates](docs/modulos.md)
+* [Como levantar el ambiente con python](docs/python.md)
+* [Uso de los modulos para crear un pipeline o template](docs/modulos.md)
 
 ---
 
