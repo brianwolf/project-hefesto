@@ -4,47 +4,22 @@
 
 ![img](img/hefesto.jpg)
 
-## :gear: Requisitos
+## :tada: Uso
 
-* python 3.9
-* virtualenv
-
-## :tada: Uso con Python
-
-Levantar el ambiente
+Se puede descargar del siguiente [link](https://github.com/brianwolf/project-hefesto/releases)
 
 ```bash
-virtualenv -p python3.9 env
-
-. env/bin/activate
-
-pip install -r requeriments.txt
+hefesto example/pipeline_ejemplo.yaml
 ```
 
-Ejecutar
+---
 
-```bash
-python app.py examples/pipeline_ejemplo.yaml
-```
+## :leftwards_arrow_with_hook: Navegar
 
-## :tada: Construir el script
+* [Documentacion para levantar el ambiente con python](docs/python.md)
+* [Como usar los modulos para crear pipelines y templates](docs/modulos.md)
 
-Se lo puede usar en modo script ejecutando (se tiene que levantar el ambiente primero):
-
-```bash
-make c
-
-./hefesto example/pipeline_ejemplo.yaml
-```
-## :tada: Instalar el binario
-
-Se puede descargar el binario y usarlo en un sistema linux
-
-```bash
-wget https://github.com/brianwolf/project-hefesto/releases/download/1.0.0/hefesto
-sudo chmod +x hefesto
-sudo mv hefesto /usr/bin
-```
+---
 
 ## :books: Referencias
 
