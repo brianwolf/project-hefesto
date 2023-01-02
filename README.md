@@ -4,15 +4,16 @@
 
 ![img](img/hefesto.jpg)
 
-
 ## :tada: Uso
 
-Descargar el script de **hefesto** de la siguiente [url](https://github.com/brianwolf/project-hefesto/releases)
+Se puede descargar del siguiente [link](https://github.com/brianwolf/project-hefesto/releases)
 
 ```bash
 hefesto example/pipeline_ejemplo.yaml
 ```
+
 ---
+
 ## :leftwards_arrow_with_hook: Navegar
 
 * [Como levantar el ambiente con python](docs/python.md)

@@ -92,10 +92,3 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 ## :leftwards_arrow_with_hook: Navegar
 
 * [Volver atras](../README.md)
-
-
-
-
-
-
-
