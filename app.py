@@ -17,7 +17,7 @@ from logic.apps.templates.services import exec_template_service
 
 # VARIABLES
 # ----------------------------------------
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 
 if sys.argv[1] in ['--version', '-v']:
     print(VERSION)
@@ -65,9 +65,18 @@ def _get_params_dict(params_str) -> Dict[str, any]:
     return params_dict
 
 
+def _get_full_path(path: str) -> str:
+    if not path.startswith('/') and not path.startswith('http'):
+        return f'{os.getcwd()}/{path}'
+    return path
+
+
 # SCRIPT
 # ----------------------------------------
+
 # para que funcione al estar compilado
+yaml_path = _get_full_path(yaml_path)
+out_path = _get_full_path(out_path)
 if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
 
