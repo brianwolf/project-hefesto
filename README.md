@@ -17,7 +17,7 @@ hefesto example/pipeline_ejemplo.yaml
 
 * [Como levantar el ambiente con python](docs/python.md)
 * [Uso de los modulos para crear un pipeline o template](docs/modulos.md)
-* [Repositorio con ejemplos](https://github.com/brianwolf/project-hefesto)
+* [Repositorio con ejemplos](https://github.com/brianwolf/repo-hefesto-templates/)
 
 
 ## :books: Referencias
