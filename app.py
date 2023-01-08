@@ -4,9 +4,9 @@ import argparse
 import logging
 import os
 import sys
-import urllib.request
 from sys import exit
 from typing import Dict
+from urllib.request import urlopen
 
 import yaml
 
@@ -44,10 +44,11 @@ params_str = args.p if args.p else ''
 def _get_content(yaml_path: str):
 
     if yaml_path.startswith('http'):
-        return urllib.request.urlopen(yaml_path)
+        f = urlopen(yaml_path)
+        return f.read().decode("utf-8")
 
     with open(yaml_path) as f:
-        return f.read()
+        return f.read().decode("utf-8")
 
 
 def _get_dict(yaml_path: str) -> Dict[str, any]:
