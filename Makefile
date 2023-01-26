@@ -1,4 +1,4 @@
-compile c:
+package p:
 	rm -fr build dist *.spec
 	
 	pyinstaller app.py \
