@@ -48,7 +48,7 @@ def _get_content(yaml_path: str):
         return f.read().decode("utf-8")
 
     with open(yaml_path) as f:
-        return f.read().decode("utf-8")
+        return f.read()
 
 
 def _get_dict(yaml_path: str) -> Dict[str, any]:
