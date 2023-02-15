@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+import ssl
 import sys
 from sys import exit
 from typing import Dict
@@ -44,7 +45,8 @@ params_str = args.p if args.p else ''
 def _get_content(yaml_path: str):
 
     if yaml_path.startswith('http'):
-        f = urlopen(yaml_path)
+        context = ssl._create_unverified_context()
+        f = urlopen(yaml_path, context=context)
         return f.read().decode("utf-8")
 
     with open(yaml_path) as f:
