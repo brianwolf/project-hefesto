@@ -18,7 +18,7 @@ from logic.apps.templates.services import exec_template_service
 
 # VARIABLES
 # ----------------------------------------
-VERSION = '1.2.0'
+VERSION = '1.2.1'
 
 if sys.argv[1] in ['--version', '-v']:
     print(VERSION)
