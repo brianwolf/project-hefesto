@@ -1,6 +1,5 @@
 import os
 from importlib.util import module_from_spec, spec_from_file_location
-from uuid import UUID
 
 import yaml
 from jinja2 import Template
@@ -17,8 +16,6 @@ def exec(pipeline_str: str, params: dict[str, any] = {}) -> str:
 
     pipeline_str = Template(pipeline_str).render(params)
     pipeline = _get_pipeline_dict(pipeline_str)
-
-    print(pipeline_str)
 
     try:
         original_workindir = os.getcwd()

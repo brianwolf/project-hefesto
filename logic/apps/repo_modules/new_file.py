@@ -10,7 +10,7 @@ def exec(workingdir: str, config: Dict[str, str]):
     content = config.get('content')
 
     folder_path = os.path.dirname(path)
-    print(folder_path)
+
     if not os.path.exists(folder_path) and folder_path != '':
         os.makedirs(folder_path, exist_ok=True)
 

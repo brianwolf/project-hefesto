@@ -6,7 +6,9 @@ from typing import Dict
 def sh(cmd: str, echo: bool = False):
     if echo:
         print(cmd)
-    print(sh_out(cmd))
+    out = sh_out(cmd)
+    if echo:
+        print(out)
 
 
 def sh_out(cmd: str) -> str:

@@ -15,31 +15,34 @@ from logic.apps.filesystem import service as filesystem_service
 from logic.apps.filesystem import workingdir_service
 from logic.apps.pipeline import service as pipline_service
 
-# VARIABLES
-# ----------------------------------------
+
 VERSION = '1.3.0'
 
 if sys.argv[1] in ['--version', '-v']:
     print(VERSION)
     exit(0)
 
+# ----------------------------------------
+# VARIABLES
+# ----------------------------------------
+
 parser = argparse.ArgumentParser()
 
-parser.add_argument('yaml', help='Yaml pipeline path or url')
-parser.add_argument(
-    '-p', help='Pipeline params. Format: -p KEY1=VALUE1,KEY2=VALUE2', required=False)
-parser.add_argument('-f', help='Yaml file params', required=False)
-parser.add_argument('-o', help='Folder output', required=False)
+parser.add_argument('pipeline_file', help='Yaml pipeline path or url')
+parser.add_argument('-p', help='params -p K1=V1,K2=V2', required=False)
+parser.add_argument('-f', help='file params', required=False)
+parser.add_argument('-o', help='folder output', required=False)
 
 args = parser.parse_args()
 
-yaml_path = args.yaml
-out_path = args.o if args.o else os.getcwd()
+yaml_path = args.pipeline_file
 params_str = args.p if args.p else None
 params_path = args.f if args.f else None
+out_path = args.o if args.o else os.getcwd()
 
 
-# FUNCIONES
+# ----------------------------------------
+# FUNCTIONS
 # ----------------------------------------
 
 def _get_content(yaml_path: str):
@@ -78,12 +81,14 @@ def _get_full_path(path: str) -> str:
     return path
 
 
+# ----------------------------------------
 # SCRIPT
 # ----------------------------------------
 
 # para que funcione al estar compilado
 yaml_path = _get_full_path(yaml_path)
 out_path = _get_full_path(out_path)
+params_path = _get_full_path(params_path)
 if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
 
