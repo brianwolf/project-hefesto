@@ -52,6 +52,8 @@ def _get_content(yaml_path: str):
         f = urlopen(yaml_path, context=context)
         return f.read().decode("utf-8")
 
+    yaml_path = _get_full_path(yaml_path)
+
     with open(yaml_path) as f:
         return f.read()
 
@@ -76,7 +78,7 @@ def _get_params_dict() -> Dict[str, any]:
 
 
 def _get_full_path(path: str) -> str:
-    if path and not path.startswith('/') and not path.startswith('http'):
+    if path and not path.startswith('http'):
         return f'{os.getcwd()}/{path}'
     return path
 
@@ -86,15 +88,12 @@ def _get_full_path(path: str) -> str:
 # ----------------------------------------
 
 # para que funcione al estar compilado
-yaml_path = _get_full_path(yaml_path)
-out_path = _get_full_path(out_path)
-params_path = _get_full_path(params_path)
 if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
 
 try:
-    params_dict = _get_params_dict()
     yaml_str = _get_content(yaml_path)
+    params_dict = _get_params_dict()
 
     id = pipline_service.exec(yaml_str, params_dict)
 

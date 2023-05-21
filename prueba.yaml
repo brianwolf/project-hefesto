@@ -1,0 +1,12 @@
+- module: copy
+  from: /home/brian/Downloads/openshift/
+  to: .
+
+- module: copy
+  from: openshift/practica.sh
+  to: asd.sh
+
+- module: sh
+  cmd: "echo asdasdasdas >> asd.sh"
+
+  
