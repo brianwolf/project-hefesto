@@ -37,9 +37,9 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 > hace un git clon de un repositorio de git
 
 * url: url del repo de git
-* username: opcional, nombre de usuario del repo
-* password: opcional, pass del usuario del repo
-* branch: opcional, rama del repo, por default es master o main
+* username: (opcional) nombre de usuario del repo
+* password: (opcional) pass del usuario del repo
+* branch: (opcional) rama del repo, por default es master o main
 
 ## move
 
@@ -86,6 +86,13 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 > Establece un workingdir
 
 * path: path
+
+## zip
+
+> Genera un archivo zip ejecutando el comando *zip*
+
+* path: path
+* output: (opcional) nombre del archivo zip de salida
 
 ---
 

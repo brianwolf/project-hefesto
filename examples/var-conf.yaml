@@ -1,4 +1,7 @@
-archivo:
-  nombre: script.py
+file:
+  name: script.py
   host: localhost
+  user: admin
+  passwd: Pa$$W0rd
+  db: write-math
         

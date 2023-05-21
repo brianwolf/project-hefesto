@@ -1,14 +1,14 @@
 - module: new_file
-  path: {{ archivo.nombre }}
+  path: {{ file.name }}
   content: |
     #!/usr/bin/env python
     import preprocessing
 
     mysql = {
-        "host": "{{ archivo.host }}",
-        "user": "root",
-        "passwd": "my secret password",
-        "db": "write-math",
+        "host": "{{ file.host }}",
+        "user": "{{ file.user }}",
+        "passwd": "{{ file.passwd }}",
+        "db": "{{ file.db }}",
     }
 
     use_anonymous = True

@@ -76,7 +76,7 @@ def _get_params_dict() -> Dict[str, any]:
 
 
 def _get_full_path(path: str) -> str:
-    if not path.startswith('/') and not path.startswith('http'):
+    if path and not path.startswith('/') and not path.startswith('http'):
         return f'{os.getcwd()}/{path}'
     return path
 
