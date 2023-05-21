@@ -30,3 +30,6 @@
     UTN-sensorial-raspberry-deploy: "prueba"
   ignore:
     - .git
+
+- module: zip
+  output: asd.zip

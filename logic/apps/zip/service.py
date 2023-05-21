@@ -3,17 +3,17 @@ from typing import List
 from zipfile import ZIP_DEFLATED, ZipFile
 
 
-def create(zip_path: str, file_paths: str):
+def create(zip_path: str, files_path: str):
 
     original_workindir = os.getcwd()
-    os.chdir(file_paths)
-    
-    paths = walk_path(file_paths)
-    
+    os.chdir(files_path)
+
+    paths = walk_path(files_path)
+
     with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zip:
         for file in paths:
-            zip.write(file.replace(f'{file_paths}/', ''))
-    
+            zip.write(file.replace(f'{files_path}/', ''))
+
     os.chdir(original_workindir)
 
 

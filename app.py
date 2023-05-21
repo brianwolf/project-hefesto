@@ -11,14 +11,13 @@ from urllib.request import urlopen
 
 import yaml
 
-from logic.apps.filesystem.services import (filesystem_service,
-                                            workingdir_service)
-from logic.apps.pipeline.services import exec_pipeline_service
-from logic.apps.templates.services import exec_template_service
+from logic.apps.filesystem import service as filesystem_service
+from logic.apps.filesystem import workingdir_service
+from logic.apps.pipeline import service as pipline_service
 
 # VARIABLES
 # ----------------------------------------
-VERSION = '1.2.1'
+VERSION = '1.3.0'
 
 if sys.argv[1] in ['--version', '-v']:
     print(VERSION)
@@ -26,17 +25,18 @@ if sys.argv[1] in ['--version', '-v']:
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('yaml', help='Yaml path to pipeline or template')
+parser.add_argument('yaml', help='Yaml pipeline path or url')
 parser.add_argument(
-    '-p', help='Template params. Format: -p KEY1=VALUE1,KEY2=VALUE2', required=False)
-parser.add_argument('-o', help='Zip output',
-                    required=False, default='project.zip')
+    '-p', help='Pipeline params. Format: -p KEY1=VALUE1,KEY2=VALUE2', required=False)
+parser.add_argument('-f', help='Yaml file params', required=False)
+parser.add_argument('-o', help='Folder output', required=False)
 
 args = parser.parse_args()
 
 yaml_path = args.yaml
-out_path = args.o if args.o else 'project.zip'
-params_str = args.p if args.p else ''
+out_path = args.o if args.o else os.getcwd()
+params_str = args.p if args.p else None
+params_path = args.f if args.f else None
 
 
 # FUNCIONES
@@ -57,13 +57,17 @@ def _get_dict(yaml_path: str) -> Dict[str, any]:
     return yaml.load(_get_content(yaml_path), Loader=yaml.FullLoader)
 
 
-def _get_params_dict(params_str) -> Dict[str, any]:
+def _get_params_dict() -> Dict[str, any]:
     params_dict = {}
 
-    for kv in params_str.split(','):
-        k = kv.split('=')[0]
-        v = kv.split('=')[1]
-        params_dict[k] = v
+    if params_str:
+        for kv in params_str.split(','):
+            k = kv.split('=')[0]
+            v = kv.split('=')[1]
+            params_dict[k] = v
+
+    if params_path:
+        params_dict.update(_get_dict(params_path))
 
     return params_dict
 
@@ -83,28 +87,14 @@ out_path = _get_full_path(out_path)
 if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
 
-
-print(f'Running')
-
 try:
-    if params_str:
-        params_dict = _get_params_dict(params_str)
+    params_dict = _get_params_dict()
+    yaml_str = _get_content(yaml_path)
 
-        yaml_str = _get_content(yaml_path)
-
-        id, zip_path = exec_template_service.exec(
-            yaml_str, params_dict, out_path)
-
-    else:
-        yaml_dict = _get_dict(yaml_path)
-        id, zip_path = exec_pipeline_service.exec(yaml_dict, out_path)
+    id = pipline_service.exec(yaml_str, params_dict)
 
 except Exception as e:
     logging.exception(e)
-    print(f'Error on process')
     exit(1)
 
-filesystem_service.move_file(zip_path, out_path)
-workingdir_service.delete(id)
-
-print(f'Success')
+filesystem_service.move_file(workingdir_service.fullpath(id), out_path)

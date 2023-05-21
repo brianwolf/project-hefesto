@@ -1,0 +1,18 @@
+- module: new_file
+  path: {{ archivo.nombre }}
+  content: |
+    #!/usr/bin/env python
+    import preprocessing
+
+    mysql = {
+        "host": "{{ archivo.host }}",
+        "user": "root",
+        "passwd": "my secret password",
+        "db": "write-math",
+    }
+
+    use_anonymous = True
+
+- module: sh
+  cmd: |
+    echo "asd" > asd.txt

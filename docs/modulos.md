@@ -30,7 +30,7 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 
 > borra un archivo
 
-* path: path 
+* path: path
 
 ## git_clone
 
@@ -59,7 +59,7 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 
 > crea un directorio
 
-* path: path 
+* path: path
 
 ## replace_content
 
@@ -87,8 +87,8 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 
 * path: path
 
-
 ---
+
 ## :leftwards_arrow_with_hook: Navegar
 
 * [Volver atras](../README.md)
