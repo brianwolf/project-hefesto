@@ -1,0 +1,4 @@
+- module: sh
+  cmd: echo {{ content }} >> {{ file }}.txt
+
+  

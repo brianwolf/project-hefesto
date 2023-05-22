@@ -18,7 +18,7 @@ from logic.apps.pipeline import service as pipline_service
 
 VERSION = '1.3.0'
 
-if sys.argv[1] in ['--version', '-v']:
+if len(sys.argv) == 2 and sys.argv[1] in ['--version', '-v']:
     print(VERSION)
     exit(0)
 
@@ -28,17 +28,17 @@ if sys.argv[1] in ['--version', '-v']:
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('pipeline_file', help='Yaml pipeline path or url')
-parser.add_argument('-p', help='params -p K1=V1,K2=V2', required=False)
-parser.add_argument('-f', help='file params', required=False)
+parser.add_argument('-i', help='pipeline yaml path or url', required=False)
 parser.add_argument('-o', help='folder output', required=False)
+parser.add_argument('-p', help='params -p K1=V1,K2=V2', required=False)
+parser.add_argument('-f', help='params yaml path', required=False)
 
 args = parser.parse_args()
 
-yaml_path = args.pipeline_file
-params_str = args.p if args.p else None
-params_path = args.f if args.f else None
+in_path = args.i if args.i else 'hefesto.yaml'
 out_path = args.o if args.o else os.getcwd()
+params_str = args.p if args.p else None
+params_path = args.f if args.f else 'conf.yaml'
 
 
 # ----------------------------------------
@@ -54,12 +54,18 @@ def _get_content(yaml_path: str):
 
     yaml_path = _get_full_path(yaml_path)
 
-    with open(yaml_path) as f:
-        return f.read()
+    if os.path.exists(yaml_path):
+        with open(yaml_path) as f:
+            return f.read()
+
+    return ''
 
 
 def _get_dict(yaml_path: str) -> Dict[str, any]:
-    return yaml.load(_get_content(yaml_path), Loader=yaml.FullLoader)
+    content = _get_content(yaml_path)
+    if not content:
+        return {}
+    return yaml.load(content, Loader=yaml.FullLoader)
 
 
 def _get_params_dict() -> Dict[str, any]:
@@ -92,7 +98,7 @@ if hasattr(sys, '_MEIPASS'):
     os.chdir(sys._MEIPASS)
 
 try:
-    yaml_str = _get_content(yaml_path)
+    yaml_str = _get_content(in_path)
     params_dict = _get_params_dict()
 
     id = pipline_service.exec(yaml_str, params_dict)

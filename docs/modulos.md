@@ -16,7 +16,6 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
   path: /
   content: |
     soy un archivo muy feliz
-    :)
 ```
 
 ## copy
