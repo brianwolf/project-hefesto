@@ -34,13 +34,12 @@ def exec(config: Dict[str, str]):
     if words:
         for old, new in words.items():
 
-            paths = walk_path(workingdir)
-            for i in range(0, len(paths)):
+            paths = walk_path(os.getcwd())
+            for a_path in list(paths):
 
-                if is_a_ignored_path(paths[i], ignore):
+                if is_a_ignored_path(a_path, ignore):
                     continue
 
-                basename = os.path.basename(paths[i])
+                basename = os.path.basename(a_path)
                 if old in basename:
-                    shutil.move(paths[i], paths[i].replace(old, new))
-                    paths = walk_path(workingdir)
+                    shutil.move(a_path, a_path.replace(old, new))

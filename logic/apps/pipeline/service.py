@@ -58,7 +58,7 @@ def _get_module_path(module_name: str) -> str:
     module_path = f'{module_service.get_path()}/{module_name}.py'
 
     # para que funcione al estar compilado
-    if hasattr(sys, '_MEIPASS'):
-        module_path = f'{sys._MEIPASS}/{module_path}'
+    module_path = f'{sys._MEIPASS}/{module_path}' if hasattr(
+        sys, '_MEIPASS') else f'../{module_path}'
 
     return module_path
