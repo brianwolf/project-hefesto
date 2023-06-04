@@ -36,9 +36,9 @@ parser.add_argument('-f', help='params yaml path', required=False)
 args = parser.parse_args()
 
 in_path = args.i if args.i else 'hefesto.yaml'
-out_path = args.o if args.o else os.getcwd()
+out_path = args.o if args.o else None
 params_str = args.p if args.p else None
-params_path = args.f if args.f else 'conf.yaml'
+params_path = args.f if args.f else 'config.yaml'
 
 
 # ----------------------------------------
@@ -84,7 +84,7 @@ def _get_params_dict() -> Dict[str, any]:
 
 
 def _get_full_path(path: str) -> str:
-    if path and not path.startswith('http'):
+    if path and not path.startswith('http') and not path.startswith('/'):
         return f'{os.getcwd()}/{path}'
     return path
 
@@ -92,10 +92,6 @@ def _get_full_path(path: str) -> str:
 # ----------------------------------------
 # SCRIPT
 # ----------------------------------------
-
-# para que funcione al estar compilado
-if hasattr(sys, '_MEIPASS'):
-    os.chdir(sys._MEIPASS)
 
 try:
     yaml_str = _get_content(in_path)
@@ -107,4 +103,5 @@ except Exception as e:
     logging.exception(e)
     exit(1)
 
-filesystem_service.move_file(workingdir_service.fullpath(id), out_path)
+if out_path:
+    filesystem_service.move_file(workingdir_service.fullpath(id), out_path)

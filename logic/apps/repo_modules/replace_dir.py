@@ -25,7 +25,7 @@ def is_a_ignored_path(path: str, ignore: List[str]) -> bool:
     return False
 
 
-def exec(workingdir: str, config: Dict[str, str]):
+def exec(config: Dict[str, str]):
 
     words = config.get('words')
     regex = config.get('regex')

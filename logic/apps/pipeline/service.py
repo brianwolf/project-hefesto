@@ -1,5 +1,6 @@
 import os
 from importlib.util import module_from_spec, spec_from_file_location
+import sys
 
 import yaml
 from jinja2 import Template
@@ -26,7 +27,7 @@ def exec(pipeline_str: str, params: dict[str, any] = {}) -> str:
         for stage in pipeline:
 
             module_name = stage['module']
-            module_path = f'{original_workindir}/{module_service.get_path()}/{module_name}.py'
+            module_path = _get_module_path(module_name)
 
             if not os.path.exists(module_path):
                 msj = f'Module with name as {module_name} not exist'
@@ -36,7 +37,7 @@ def exec(pipeline_str: str, params: dict[str, any] = {}) -> str:
             module = module_from_spec(spec)
             spec.loader.exec_module(module)
 
-            module.exec(workindir, stage)
+            module.exec(stage)
 
         os.chdir(original_workindir)
 
@@ -50,3 +51,14 @@ def exec(pipeline_str: str, params: dict[str, any] = {}) -> str:
 
 def _get_pipeline_dict(pipeline_str: str) -> dict[str, any]:
     return yaml.load(pipeline_str, Loader=yaml.FullLoader)
+
+
+def _get_module_path(module_name: str) -> str:
+
+    module_path = f'{module_service.get_path()}/{module_name}.py'
+
+    # para que funcione al estar compilado
+    if hasattr(sys, '_MEIPASS'):
+        module_path = f'{sys._MEIPASS}/{module_path}'
+
+    return module_path

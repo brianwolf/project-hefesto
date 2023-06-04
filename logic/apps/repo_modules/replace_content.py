@@ -26,13 +26,12 @@ def is_a_ignored_path(path: str, ignore: List[str]) -> bool:
     return False
 
 
-def exec(workingdir: str, config: Dict[str, str]):
+def exec(config: Dict[str, str]):
 
     words = config.get('words')
-    regex = config.get('regex')
     ignore = config.get('ignore', [])
 
-    files_paths = files_on_path(workingdir)
+    files_paths = files_on_path(".")
 
     if words:
         for file_path in files_paths:

@@ -1,14 +1,14 @@
+import os
 import shutil
+from datetime import datetime
 from os import walk
 from pathlib import Path
 from typing import List
-from uuid import UUID, uuid4
-
-_TEMP_PATH = '/tmp'
 
 
 def create() -> str:
-    id = str(uuid4()).split('-')[0]
+    now = datetime.now()
+    id = f'{now.year}{now.month}{now.day}{now.hour}{now.minute}{now.second}'
     Path(fullpath(id)).mkdir(parents=True, exist_ok=True)
     return id
 
@@ -18,7 +18,7 @@ def delete(id: str):
 
 
 def fullpath(id: str) -> str:
-    return f'{_TEMP_PATH}/{id}'
+    return f'{os.getcwd()}/{id}'
 
 
 def get(id: str) -> List[str]:

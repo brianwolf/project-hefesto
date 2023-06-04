@@ -1,0 +1,22 @@
+{% if crear_carpeta %}
+
+- module: new_folder
+  path: carpeta
+
+- module: workingdir
+  path: carpeta
+
+- module: bash
+  cmd: "> asd.txt"
+
+- module: workingdir
+  path: ../
+{% endif %}
+
+- module: copy
+  from: ../example.yaml
+  to: .
+
+- module: replace_content
+  words:
+    a: quien
