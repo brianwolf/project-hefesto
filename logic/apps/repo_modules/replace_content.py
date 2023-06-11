@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Dict, List
 
 
@@ -28,22 +29,23 @@ def is_a_ignored_path(path: str, ignore: List[str]) -> bool:
 
 def exec(config: Dict[str, str]):
 
-    words = config.get('words')
+    words = config['words']
     ignore = config.get('ignore', [])
 
     files_paths = files_on_path(".")
 
-    if words:
-        for file_path in files_paths:
+    for file_path in files_paths:
 
-            if is_a_ignored_path(file_path, ignore):
-                continue
+        if is_a_ignored_path(file_path, ignore):
+            continue
 
-            with open(file_path, encoding='ISO-8859-1') as file:
-                file_text = str(file.read())
+        with open(file_path, encoding='ISO-8859-1') as file:
+            file_text = str(file.read())
 
-            for old, new in words.items():
-                file_text = file_text.replace(old, new)
+        for k, v in words.items():
+            finds = re.findall(k, file_text)
+            for f in finds:
+                file_text = file_text.replace(f, v)
 
-            with open(file_path, 'w') as file:
-                file.write(file_text)
+        with open(file_path, 'w', encoding='ISO-8859-1') as file:
+            file.write(file_text)
