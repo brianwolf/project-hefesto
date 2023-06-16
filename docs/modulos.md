@@ -22,7 +22,7 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 
 > copia archivos a la carpeta de trabajo
 
-* to: (opcional) path donde se copia el contenido del directorio ./ 
+* ingore: (opcional) lista de paths para ignorar en el copiado 
 
 ## copy
 
