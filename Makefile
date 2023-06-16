@@ -9,3 +9,6 @@ package p:
 	mv dist/* .
 	rm -fr build dist *.spec
 		
+
+install i: p
+	sudo mv hefesto /usr/local/bin/ 
