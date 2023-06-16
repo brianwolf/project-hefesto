@@ -1,0 +1,3 @@
+- module: bash
+  cmd: |
+    echo "{{ "default" | env('HOME') }}" > asd.txt
