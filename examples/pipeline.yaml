@@ -1,4 +1,4 @@
-- module: sh
+- module: bash
   cmd: "> asd.txt"
 
 - module: git_clone
@@ -7,13 +7,13 @@
 - module: workingdir
   path: "UTN-sensorial-raspberry-deploy"
 
-- module: sh
+- module: bash
   cmd: "> hola.txt"
 
 - module: workingdir
   path: "/"
 
-- module: sh
+- module: bash
   cmd: "> volvi.txt"
 
 - module: replace_dir

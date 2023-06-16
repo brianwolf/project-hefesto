@@ -16,7 +16,7 @@ from logic.apps.filesystem import workingdir_service
 from logic.apps.pipeline import service as pipline_service
 
 
-VERSION = '1.3.0'
+VERSION = '1.4.0'
 
 if len(sys.argv) == 2 and sys.argv[1] in ['--version', '-v']:
     print(VERSION)
