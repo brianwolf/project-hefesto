@@ -2,7 +2,7 @@
 
 ## :gear: Requisitos
 
-* python 3.9
+* python 3.10
 * virtualenv
 
 ## :tada: Uso
@@ -10,7 +10,7 @@
 Levantar el ambiente
 
 ```bash
-virtualenv -p python3.9 env
+virtualenv -p python3.10 env
 
 . env/bin/activate
 

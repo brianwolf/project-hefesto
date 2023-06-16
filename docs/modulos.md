@@ -18,6 +18,12 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
     soy un archivo muy feliz
 ```
 
+## add
+
+> copia archivos a la carpeta de trabajo
+
+* to: (opcional) path donde se copia el contenido del directorio ./ 
+
 ## copy
 
 > copia un archivo de un origen a un destino
@@ -64,19 +70,19 @@ Para usar los modulos estos tienen que estar en un formato yaml como el siguient
 
 > reemplaza el contenido de los archivos en un path
 
-* words: lista de palabras a reemplazar, por ejemplo: - README.md: "ASD.md"
-* ignore: lista de paths para ignorar a reemplazar el contenido
+* words: lista de palabras a reemplazar, por ejemplo: - README.md: "ASD.md", se puede usar regex
+* ignore: (opcional) lista de paths para ignorar a reemplazar el contenido
 
 ## replace_dir
 
 > reemplaza el nombre del archivo por otro
 
-* words: lista de palabras a reemplazar, por ejemplo: - README.md: "ASD.md"
-* ignore: lista de paths para ignorar a reemplazar
+* words: lista de palabras a reemplazar, por ejemplo: - README.md: "ASD.md", se puede usar regex
+* ignore: (opcional) lista de paths para ignorar a reemplazar
 
-## sh
+## bash
 
-> Ejecuta comandos con sh
+> Ejecuta comandos con bash
 
 * cmd: comando a ejecutar
 
