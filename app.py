@@ -15,10 +15,9 @@ from logic.apps.filesystem import service as filesystem_service
 from logic.apps.filesystem import workingdir_service
 from logic.apps.pipeline import service as pipline_service
 
+VERSION = "1.4.0"
 
-VERSION = '1.4.0'
-
-if len(sys.argv) == 2 and sys.argv[1] in ['--version', '-v']:
+if len(sys.argv) == 2 and sys.argv[1] in ["--version", "-v"]:
     print(VERSION)
     exit(0)
 
@@ -28,26 +27,26 @@ if len(sys.argv) == 2 and sys.argv[1] in ['--version', '-v']:
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('-i', help='pipeline yaml path or url', required=False)
-parser.add_argument('-o', help='folder output', required=False)
-parser.add_argument('-p', help='params -p K1=V1,K2=V2', required=False)
-parser.add_argument('-f', help='params yaml path', required=False)
+parser.add_argument("-i", help="pipeline yaml path or url", required=False)
+parser.add_argument("-o", help="folder output", required=False)
+parser.add_argument("-p", help="params -p K1=V1,K2=V2", required=False)
+parser.add_argument("-f", help="params yaml path", required=False)
 
 args = parser.parse_args()
 
-in_path = args.i if args.i else 'hefesto.yaml'
+in_path = args.i if args.i else "hefesto.yaml"
 out_path = args.o if args.o else None
 params_str = args.p if args.p else None
-params_path = args.f if args.f else 'config.yaml'
+params_path = args.f if args.f else "config.yaml"
 
 
 # ----------------------------------------
 # FUNCTIONS
 # ----------------------------------------
 
-def _get_content(yaml_path: str):
 
-    if yaml_path.startswith('http'):
+def _get_content(yaml_path: str):
+    if yaml_path.startswith("http"):
         context = ssl._create_unverified_context()
         f = urlopen(yaml_path, context=context)
         return f.read().decode("utf-8")
@@ -58,7 +57,7 @@ def _get_content(yaml_path: str):
         with open(yaml_path) as f:
             return f.read()
 
-    return ''
+    return ""
 
 
 def _get_dict(yaml_path: str) -> Dict[str, any]:
@@ -72,9 +71,9 @@ def _get_params_dict() -> Dict[str, any]:
     params_dict = {}
 
     if params_str:
-        for kv in params_str.split(','):
-            k = kv.split('=')[0]
-            v = kv.split('=')[1]
+        for kv in params_str.split(","):
+            k = kv.split("=")[0]
+            v = kv.split("=")[1]
             params_dict[k] = v
 
     if params_path:
@@ -84,14 +83,18 @@ def _get_params_dict() -> Dict[str, any]:
 
 
 def _get_full_path(path: str) -> str:
-    if path and not path.startswith('http') and not path.startswith('/'):
-        return f'{os.getcwd()}/{path}'
+    if path and not path.startswith("http") and not path.startswith("/"):
+        return f"{os.getcwd()}/{path}"
     return path
 
 
 # ----------------------------------------
 # SCRIPT
 # ----------------------------------------
+
+if not os.path.exists(in_path):
+    print(f"Pipeline file with path {in_path} not exist")
+    exit(1)
 
 try:
     yaml_str = _get_content(in_path)
