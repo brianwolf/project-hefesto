@@ -26,14 +26,20 @@ def is_a_ignored_path(path: str, ignore: list[str]) -> bool:
 
 
 def exec(config: Dict[str, str]):
+
+    paths = config.get("paths", [""])
     ignore = config.get("ignore", [])
 
-    for pf in files_on_path("../"):
-        if is_a_ignored_path(pf, ignore):
-            continue
+    for path in paths:
 
-        mkdir_to = os.path.dirname(pf).replace("../", "")
-        pf_to = pf.replace("//", "/").replace("../", "")
+        path = "../" + path
 
-        sh(f"mkdir -p {mkdir_to}")
-        sh(f"cp {pf} {pf_to}")
+        for pf in files_on_path(path):
+            if is_a_ignored_path(pf, ignore):
+                continue
+
+            mkdir_to = os.path.dirname(pf).replace("../", "")
+            pf_to = pf.replace("//", "/").replace("../", "")
+
+            sh(f"mkdir -p {mkdir_to}")
+            sh(f"cp {pf} {pf_to}")
