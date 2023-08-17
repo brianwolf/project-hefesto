@@ -5,6 +5,7 @@ import logging
 import os
 import ssl
 import sys
+from functools import reduce
 from sys import exit
 from typing import Dict
 from urllib.request import urlopen
@@ -15,7 +16,7 @@ from logic.apps.filesystem import service as filesystem_service
 from logic.apps.filesystem import workingdir_service
 from logic.apps.pipeline import service as pipline_service
 
-VERSION = "1.4.0"
+VERSION = "0.1.0"
 
 if len(sys.argv) == 2 and sys.argv[1] in ["--version", "-v"]:
     print(VERSION)
@@ -27,10 +28,12 @@ if len(sys.argv) == 2 and sys.argv[1] in ["--version", "-v"]:
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-i", help="pipeline yaml path or url", required=False)
+parser.add_argument(
+    "-i", help="pipeline yaml path or url (default hefesto.yaml)", required=False)
 parser.add_argument("-o", help="folder output", required=False)
 parser.add_argument("-p", help="params -p K1=V1,K2=V2", required=False)
-parser.add_argument("-f", help="params yaml path", required=False)
+parser.add_argument(
+    "-f", help="params yaml path (default config.yaml)", required=False)
 
 args = parser.parse_args()
 
@@ -68,18 +71,34 @@ def _get_dict(yaml_path: str) -> Dict[str, any]:
 
 
 def _get_params_dict() -> Dict[str, any]:
-    params_dict = {}
+    final_dict = {}
 
+    params_dict = {}
     if params_str:
         for kv in params_str.split(","):
             k = kv.split("=")[0]
             v = kv.split("=")[1]
             params_dict[k] = v
 
+    config_dict = {}
     if params_path:
-        params_dict.update(_get_dict(params_path))
+        config_dict = _get_dict(params_path)
+        config_dict.update(params_dict)
 
-    return params_dict
+    final_dict.update(config_dict)
+    final_dict.update(params_dict)
+    return final_dict
+
+
+def _dot_to_json(params: dict[str, str]) -> dict[str, object]:
+    output = {}
+    for key, value in params.items():
+        path = key.split('.')
+        if path[0] == 'json':
+            path = path[1:]
+        target = reduce(lambda d, k: d.setdefault(k, {}), path[:-1], output)
+        target[path[-1]] = value
+    return output
 
 
 def _get_full_path(path: str) -> str:
@@ -98,7 +117,7 @@ if not os.path.exists(in_path):
 
 try:
     yaml_str = _get_content(in_path)
-    params_dict = _get_params_dict()
+    params_dict = _dot_to_json(_get_params_dict())
 
     id = pipline_service.exec(yaml_str, params_dict)
 

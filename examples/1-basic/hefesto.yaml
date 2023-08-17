@@ -1,0 +1,3 @@
+- module: bash
+  cmd: |
+    echo hola {{ conf.persona }} > asd.txt

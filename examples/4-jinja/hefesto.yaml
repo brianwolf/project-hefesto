@@ -13,10 +13,5 @@
   path: ../
 {% endif %}
 
-- module: copy
-  from: ../example.yaml
-  to: .
-
-- module: replace_content
-  words:
-    a: quien
+- module: bash
+  cmd: echo hola > asd.txt
